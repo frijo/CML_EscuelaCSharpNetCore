@@ -1,0 +1,13 @@
+C:\Users\David\CoreEscuela\bin\Debug\netcoreapp3.1\CoreEscuela.exe
+C:\Users\David\CoreEscuela\bin\Debug\netcoreapp3.1\CoreEscuela.deps.json
+C:\Users\David\CoreEscuela\bin\Debug\netcoreapp3.1\CoreEscuela.runtimeconfig.json
+C:\Users\David\CoreEscuela\bin\Debug\netcoreapp3.1\CoreEscuela.runtimeconfig.dev.json
+C:\Users\David\CoreEscuela\bin\Debug\netcoreapp3.1\CoreEscuela.dll
+C:\Users\David\CoreEscuela\bin\Debug\netcoreapp3.1\CoreEscuela.pdb
+C:\Users\David\CoreEscuela\obj\Debug\netcoreapp3.1\CoreEscuela.csprojAssemblyReference.cache
+C:\Users\David\CoreEscuela\obj\Debug\netcoreapp3.1\CoreEscuela.csproj.CoreCompileInputs.cache
+C:\Users\David\CoreEscuela\obj\Debug\netcoreapp3.1\CoreEscuela.AssemblyInfoInputs.cache
+C:\Users\David\CoreEscuela\obj\Debug\netcoreapp3.1\CoreEscuela.AssemblyInfo.cs
+C:\Users\David\CoreEscuela\obj\Debug\netcoreapp3.1\CoreEscuela.dll
+C:\Users\David\CoreEscuela\obj\Debug\netcoreapp3.1\CoreEscuela.pdb
+C:\Users\David\CoreEscuela\obj\Debug\netcoreapp3.1\CoreEscuela.genruntimeconfig.cache
