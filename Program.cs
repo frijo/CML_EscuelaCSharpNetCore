@@ -10,61 +10,14 @@ namespace CoreEscuela
     {
         static void Main(string[] args)
         {
-            var escuela = new Escuela("Escuela Platxi", 1980, TiposEscuela.Primaria, ciudad: "Quesada");
-            WriteLine(escuela);
+            var engine = new EscuelaEngine();
+            engine.Inicializar();
+
+            WriteLine(engine.escuela);
             WriteLine("================");
-            var cursoarreglo = new Curso[]{
-                new Curso() { Nombre = "101" },
-                new Curso() { Nombre = "201" },
-                new Curso { Nombre = "301" }
-            };
-            //Curso[] cursoarreglo = {...,...,...} //Otra forma de inicializar un arreglo
+           
 
-            //Aisignando Cursos desde Escuela
-
-            /*  ImprimirCursosWhile(escuela.Cursos );
-                ImprimirCursoDoWHile(escuela.Cursos );
-                ImprimirCursoFor(escuela.Cursos );
-                ImprimirCursoForEach(escuela.Cursos );
-            */
-            escuela.Cursos = new List<Curso>(){
-                new Curso() { Nombre = "101", Jornada= TiposJornada.Manana },
-                new Curso() { Nombre = "201", Jornada= TiposJornada.Manana },
-                new Curso { Nombre = "301", Jornada= TiposJornada.Manana }
-            };
-
-            var listaCursos = new List<Curso>(){
-                new Curso() { Nombre = "401", Jornada= TiposJornada.Manana },
-                new Curso() { Nombre = "501", Jornada= TiposJornada.Manana },
-                new Curso { Nombre = "501", Jornada= TiposJornada.Tarde }
-            };
-            //escuela.Cursos.Clear();
-            //
-            escuela.Cursos.Add(new Curso { Nombre = "102", Jornada = TiposJornada.Tarde });
-            escuela.Cursos.Add(new Curso { Nombre = "202", Jornada = TiposJornada.Tarde });
-
-
-            //escuela.Cursos.Remove(temp);
-
-            //Other way to add a complete list to the Curses.
-            escuela.Cursos.AddRange(listaCursos);
-            Curso temp = new Curso { Nombre = "101-vacante", Jornada = TiposJornada.Noche };
-            escuela.Cursos.Add(temp);
-            ImprimirCursosEscuela(escuela);
-            escuela.Cursos.Remove(temp);
-            ImprimirCursosEscuela(escuela);
-
-            //deleting course with a delegate method 
-            //escuela.Cursos.RemoveAll(Predicado);
-
-            //deleting course with a delegate
-            escuela.Cursos.RemoveAll(delegate (Curso cur){
-                return cur.Nombre =="301";
-            });
-            //Deleton with lambda expretion
-            escuela.Cursos.RemoveAll((cur)=> cur.Nombre=="501" && cur.Jornada==TiposJornada.Manana);
-
-            ImprimirCursosEscuela(escuela);
+            ImprimirCursosEscuela(engine.escuela);
         }
 
         private static bool Predicado(Curso obj)
