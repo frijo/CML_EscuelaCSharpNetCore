@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using CoreEscuela.Entidades;
 
-namespace CoreEscuela.Entidades
+namespace CoreEscuela.App
 {
     public class EscuelaEngine
     {

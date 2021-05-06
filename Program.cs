@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using CoreEscuela.App;
 using CoreEscuela.Entidades;
+using CoreEscuela.Util;
 using static System.Console; // Helps to not write the Console everytime
 
 namespace CoreEscuela
@@ -11,25 +13,19 @@ namespace CoreEscuela
         static void Main(string[] args)
         {
             var engine = new EscuelaEngine();
-            engine.Inicializar();
-
-            WriteLine(engine.escuela);
-            WriteLine("================");
-           
+            engine.Inicializar();                    
 
             ImprimirCursosEscuela(engine.escuela);
         }
 
         private static bool Predicado(Curso obj)
         {
-            return obj.Nombre =="301";
+            return obj.Nombre == "301";
         }
 
         private static void ImprimirCursosEscuela(Escuela escuela)
         {
-            WriteLine("================");
-            WriteLine("Cursos de la Escuela");
-            WriteLine("================");
+            Printer.WriteTitle(escuela.Nombre);
 
             /* if (escuela.Cursos != null && escuela != null)
              {
