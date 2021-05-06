@@ -97,51 +97,5 @@ namespace CoreEscuela
             }
 
         }
-
-        private static void ImprimirCursoForEach(Curso[] cursoarreglo)
-        {
-            WriteLine("Metodo ForEach");
-            foreach (var curso in cursoarreglo)
-            {
-                WriteLine($"Nombre del Cruso: {curso.Nombre}, ID del Curso : {curso.UniqueId} ");
-            }
-        }
-
-        private static void ImprimirCursoFor(Curso[] cursoarreglo)
-        {
-            WriteLine("Metodo For");
-            for (int i = 0; i < cursoarreglo.Length; i++)
-            {
-                WriteLine($"Nombre del Cruso: {cursoarreglo[i].Nombre}, ID del Curso : {cursoarreglo[i].UniqueId} ");
-            }
-        }
-
-        private static void ImprimirCursoDoWHile(Curso[] cursoarreglo)
-        {
-            WriteLine("Methodo DO-While");
-            int cont = 0;
-            do
-            {
-
-
-                WriteLine($"Nombre del Cruso: {cursoarreglo[cont].Nombre}, ID del Curso : {cursoarreglo[cont].UniqueId} ");
-                cont++;
-
-            } while (cont < cursoarreglo.Length);
-        }
-
-        private static void ImprimirCursosWhile(Curso[] cursoarreglo)
-        {
-            WriteLine("Methodo While");
-            int cont = 0;
-
-            while (cont < cursoarreglo.Length)
-            {
-
-                WriteLine($"Nombre del Cruso: {cursoarreglo[cont].Nombre}, ID del Curso : {cursoarreglo[cont].UniqueId} ");
-                cont++;
-            }
-
-        }
     }
 }
