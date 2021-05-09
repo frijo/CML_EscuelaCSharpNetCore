@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 namespace CoreEscuela.Entidades
 {
-    public class Curso
+    public class Alumno
     {
         public string Nombre { get; set; }
         public string UniqueId { get; private set; }
-        public TiposJornada Jornada { get; set; }
-        public List<Asignatura> Asignaturas {get; set;}
-        public List<Alumno> Alumnos {get; set;}
+        public List<Evaluacion> Evaluaciones { get; set; }
 
-        public Curso()
+
+        public Alumno()
         {
             this.UniqueId = Guid.NewGuid().ToString();
-           
+            this.Evaluaciones = new List<Evaluacion>();
+
         }
     }
 }
