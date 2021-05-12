@@ -44,7 +44,7 @@ namespace CoreEscuela.App
 
             return listaObj;
         }
-        #region Metodos de Carfa
+    #region Metodos de carga
         private void CargarEvaluaciones()
         {
             var lista = new List<Evaluacion>();
@@ -71,7 +71,7 @@ namespace CoreEscuela.App
                 }
 
             }
-        }
+        } 
 
         private void CargarAsignaturas()
         {
@@ -120,7 +120,7 @@ namespace CoreEscuela.App
                 curso.Alumnos = GeneararAlumnosRandom(cant);
             }
         }
-        #endregion
+    #endregion
 
 
     }

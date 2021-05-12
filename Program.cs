@@ -55,7 +55,6 @@ namespace CoreEscuela
                     var cont = 1;
                     foreach (var alunmo in curso.Alumnos)
                     {
-
                         WriteLine($"{cont}: {alunmo.Nombre}");
                         cont++;
                     }
