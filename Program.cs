@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CoreEscuela.App;
 using CoreEscuela.Entidades;
 using CoreEscuela.Util;
@@ -7,15 +8,21 @@ using static System.Console; // Helps to not write the Console everytime
 
 namespace CoreEscuela
 {
-
     class Program
     {
         static void Main(string[] args)
         {
             var engine = new EscuelaEngine();
             engine.Inicializar();
-
             ImprimirCursosEscuela(engine.escuela);
+            var listaObjetos = engine.GetObjetoEscuela();
+
+
+            //LinQ; ejecuta un query donde se cumpla que va a extrar de la listaObjetos los objetos que tengan la Interfaz Ilugar, tambien podria funcionar si pongo que me selecciones Objetos tipo Alumno por ejemplo.
+            var ListaILugar = from obj in listaObjetos
+                              where obj is ILugar
+                              select (ILugar)obj;
+
 
         }
 
@@ -48,7 +55,7 @@ namespace CoreEscuela
                     var cont = 1;
                     foreach (var alunmo in curso.Alumnos)
                     {
-                        
+
                         WriteLine($"{cont}: {alunmo.Nombre}");
                         cont++;
                     }
@@ -61,19 +68,21 @@ namespace CoreEscuela
                            cont++;
                        }
                        */
-                     ImprimirEvaluaciones(curso.Alumnos);
+                    ImprimirEvaluaciones(curso.Alumnos);
                 }
             }
 
         }
         private static void ImprimirEvaluaciones(List<Alumno> alumnos)
         {
-            foreach (var alumno in alumnos){
-                var cont=1;
-                foreach(var ev in alumno.Evaluaciones){
-                   
+            foreach (var alumno in alumnos)
+            {
+                var cont = 1;
+                foreach (var ev in alumno.Evaluaciones)
+                {
+
                     WriteLine($"Nota-{cont}.......");
-                             
+
                     WriteLine($"Nota del Alumno: {ev.Alumno.Nombre} en el curso de: {ev.Asignatura.Nombre}");
                     WriteLine($"Evaluacion: {ev.Nombre} Nota: {ev.Nota}");
                     WriteLine("***********");

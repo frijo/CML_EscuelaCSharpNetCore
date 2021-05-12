@@ -1,16 +1,8 @@
 using System;
 namespace CoreEscuela.Entidades
 {
-    public class Asignatura
-    {
+    public class Asignatura : ObjetoEscuelaBase
+    {      
 
-        public string Nombre { get; set; }
-        public string UniqueId { get; private set; }
-
-        public Asignatura()
-        {
-            this.UniqueId = Guid.NewGuid().ToString();
-
-        }
     }
 }

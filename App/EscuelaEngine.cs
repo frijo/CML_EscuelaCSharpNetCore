@@ -5,7 +5,8 @@ using CoreEscuela.Entidades;
 
 namespace CoreEscuela.App
 {
-    public class EscuelaEngine
+    //sealed permite que se creen instancias de esta clase, pero no deja que otros Objetos Herenden de esta.
+    public sealed class EscuelaEngine
     {
         public Escuela escuela { get; set; }
 
@@ -23,10 +24,30 @@ namespace CoreEscuela.App
 
             CargarEvaluaciones();
         }
+        public List<ObjetoEscuelaBase> GetObjetoEscuela()
+        {
+            var listaObj = new List<ObjetoEscuelaBase>();
+            listaObj.Add(escuela);
+            listaObj.AddRange(escuela.Cursos);
 
+            foreach (var curso in escuela.Cursos)
+            {
+                listaObj.AddRange(curso.Asignaturas);
+                listaObj.AddRange(curso.Alumnos);
+
+                foreach (var alumno in curso.Alumnos)
+                {
+                    listaObj.AddRange(alumno.Evaluaciones);
+
+                }
+            }
+
+            return listaObj;
+        }
+        #region Metodos de Carfa
         private void CargarEvaluaciones()
         {
-            var lista= new List<Evaluacion>();
+            var lista = new List<Evaluacion>();
             foreach (var curso in escuela.Cursos)
             {
                 foreach (var asignatura in curso.Asignaturas)
@@ -43,7 +64,7 @@ namespace CoreEscuela.App
                                 Nota = (float)(5 * rnd.NextDouble()),
                                 Alumno = alunmo
                             };
-                            lista.Add(ev);
+                            alunmo.Evaluaciones.Add(ev);
                         }
                     }
 
@@ -99,6 +120,8 @@ namespace CoreEscuela.App
                 curso.Alumnos = GeneararAlumnosRandom(cant);
             }
         }
+        #endregion
+
 
     }
 }
