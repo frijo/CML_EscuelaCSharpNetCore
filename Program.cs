@@ -15,8 +15,14 @@ namespace CoreEscuela
             var engine = new EscuelaEngine();
             engine.Inicializar();
             ImprimirCursosEscuela(engine.escuela);
-            var listaObjetos = engine.GetObjetoEscuela();
-
+            //int dummy = 0;
+            var listaObjetos = engine.GetObjetoEscuela(
+                out int contEva,
+                out int contAlumn,
+                out int contAsig,
+                out int contCursos
+            );
+            var dictmp = engine.GetDiccionarioObjetos();
 
             //LinQ; ejecuta un query donde se cumpla que va a extrar de la listaObjetos los objetos que tengan la Interfaz Ilugar, tambien podria funcionar si pongo que me selecciones Objetos tipo Alumno por ejemplo.
             var ListaILugar = from obj in listaObjetos

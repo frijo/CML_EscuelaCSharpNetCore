@@ -24,27 +24,83 @@ namespace CoreEscuela.App
 
             CargarEvaluaciones();
         }
-        public List<ObjetoEscuelaBase> GetObjetoEscuela()
+        public Dictionary<LlaveDiccionario, IEnumerable<ObjetoEscuelaBase>> GetDiccionarioObjetos()
+        {
+            var diccionario = new Dictionary<LlaveDiccionario, IEnumerable<ObjetoEscuelaBase>>();
+            diccionario.Add(LlaveDiccionario.Escuela, new[] { escuela });
+            diccionario.Add(LlaveDiccionario.Cursos, escuela.Cursos.Cast<ObjetoEscuelaBase>());
+            var listatmpEva = new List<Evaluacion>();
+            var listatmpAlunm= new List<Alumno>();
+            var listatmpAsig= new List<Asignatura>();
+            foreach (var curso in escuela.Cursos)
+            {
+                listatmpAlunm.AddRange(curso.Alumnos);
+                listatmpAsig.AddRange(curso.Asignaturas);
+                foreach (var alunm in curso.Alumnos)
+                {
+                    listatmpEva.AddRange(alunm.Evaluaciones);
+                }
+                
+            }
+            diccionario.Add(LlaveDiccionario.Asignaturas, listatmpAsig.Cast<ObjetoEscuelaBase>());
+            diccionario.Add(LlaveDiccionario.Alumnos, listatmpAlunm.Cast<ObjetoEscuelaBase>());
+            diccionario.Add(LlaveDiccionario.Evaluaciones, listatmpEva.Cast<ObjetoEscuelaBase>());
+
+
+            return diccionario;
+        }
+        //Parametros no oblicatorios, al no ser a~adidos los parametros cuando se llama el metodo por defecto los va a poner como true como se ve en el metodo de abajo o si no agregar otro valor del parametro cuando se llama desde otro lugar.
+        public List<ObjetoEscuelaBase> GetObjetoEscuela(
+            out int contEva,
+            out int contAlumn,
+            out int contAsig,
+            out int contCursos,
+            bool traerEvaluaciones = true,
+            bool traerAlumnos = true,
+            bool traerAsiganaturas = true,
+            bool traerCursos = true)
         {
             var listaObj = new List<ObjetoEscuelaBase>();
             listaObj.Add(escuela);
             listaObj.AddRange(escuela.Cursos);
-
-            foreach (var curso in escuela.Cursos)
+            contAsig = 0;
+            contAlumn = 0;
+            contEva = 0;
+            contCursos = 0;
+            if (traerCursos)
             {
-                listaObj.AddRange(curso.Asignaturas);
-                listaObj.AddRange(curso.Alumnos);
-
-                foreach (var alumno in curso.Alumnos)
+                contCursos = escuela.Cursos.Count;
+                foreach (var curso in escuela.Cursos)
                 {
-                    listaObj.AddRange(alumno.Evaluaciones);
+                    contAsig += curso.Asignaturas.Count;
+                    contAlumn += curso.Alumnos.Count;
+                    if (traerAsiganaturas)
+                    {
+
+                        listaObj.AddRange(curso.Asignaturas);
+
+                    }
+                    if (traerAlumnos)
+                    {
+                        listaObj.AddRange(curso.Alumnos);
+
+                    }
+                    if (traerEvaluaciones)
+                    {
+                        foreach (var alumno in curso.Alumnos)
+                        {
+                            listaObj.AddRange(alumno.Evaluaciones);
+                            contEva += alumno.Evaluaciones.Count();
+                        }
+                    }
 
                 }
             }
 
             return listaObj;
         }
-    #region Metodos de carga
+
+        #region Metodos de carga
         private void CargarEvaluaciones()
         {
             var lista = new List<Evaluacion>();
@@ -71,7 +127,7 @@ namespace CoreEscuela.App
                 }
 
             }
-        } 
+        }
 
         private void CargarAsignaturas()
         {
@@ -120,7 +176,7 @@ namespace CoreEscuela.App
                 curso.Alumnos = GeneararAlumnosRandom(cant);
             }
         }
-    #endregion
+        #endregion
 
 
     }
