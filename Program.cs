@@ -28,7 +28,7 @@ namespace CoreEscuela
             var ListaILugar = from obj in listaObjetos
                               where obj is ILugar
                               select (ILugar)obj;
-
+            engine.ImprimirDiccionario(dictmp, true);
 
         }
 

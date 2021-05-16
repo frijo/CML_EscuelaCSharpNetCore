@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CoreEscuela.Entidades;
-
+using CoreEscuela.Util;
 namespace CoreEscuela.App
 {
     //sealed permite que se creen instancias de esta clase, pero no deja que otros Objetos Herenden de esta.
@@ -17,21 +17,52 @@ namespace CoreEscuela.App
         public void Inicializar()
         {
             escuela = new Escuela("Escuela Platxi", 1980, TiposEscuela.Primaria, ciudad: "Quesada");
-
             this.CargarCursos();
             CargarAsignaturas();
-
-
             CargarEvaluaciones();
+        }
+        public void ImprimirDiccionario(Dictionary<LlaveDiccionario, IEnumerable<ObjetoEscuelaBase>> dic, bool imprEval = false)
+        {
+            foreach (var objdic in dic)
+            {
+                Printer.WriteTitle(objdic.Key.ToString());
+                foreach (var val in objdic.Value)
+                {
+                    switch (objdic.Key)
+                    {
+                        case LlaveDiccionario.Evaluacion:
+                            if (imprEval)
+                                Console.WriteLine(val);
+                        break;
+                        case LlaveDiccionario.Escuela:
+                            Console.WriteLine("Escuela: " + val);
+                        break;
+                        case LlaveDiccionario.Alumno:
+                            Console.WriteLine("Alumno: " + val);
+                        break;
+                        case LlaveDiccionario.Curso:
+                            var curtmp= val as Curso;
+                            if(curtmp !=null){
+                                int count = curtmp.Alumnos.Count;
+                                Console.WriteLine("Curso: " + val.Nombre + " Cantidad de Alumnos: " + count);
+                            }
+                        break;
+                        default:
+                            Console.WriteLine(val);
+                        break;
+                    }
+                }
+            }
+
         }
         public Dictionary<LlaveDiccionario, IEnumerable<ObjetoEscuelaBase>> GetDiccionarioObjetos()
         {
             var diccionario = new Dictionary<LlaveDiccionario, IEnumerable<ObjetoEscuelaBase>>();
             diccionario.Add(LlaveDiccionario.Escuela, new[] { escuela });
-            diccionario.Add(LlaveDiccionario.Cursos, escuela.Cursos.Cast<ObjetoEscuelaBase>());
+            diccionario.Add(LlaveDiccionario.Curso, escuela.Cursos.Cast<ObjetoEscuelaBase>());
             var listatmpEva = new List<Evaluacion>();
-            var listatmpAlunm= new List<Alumno>();
-            var listatmpAsig= new List<Asignatura>();
+            var listatmpAlunm = new List<Alumno>();
+            var listatmpAsig = new List<Asignatura>();
             foreach (var curso in escuela.Cursos)
             {
                 listatmpAlunm.AddRange(curso.Alumnos);
@@ -40,11 +71,11 @@ namespace CoreEscuela.App
                 {
                     listatmpEva.AddRange(alunm.Evaluaciones);
                 }
-                
+
             }
-            diccionario.Add(LlaveDiccionario.Asignaturas, listatmpAsig.Cast<ObjetoEscuelaBase>());
-            diccionario.Add(LlaveDiccionario.Alumnos, listatmpAlunm.Cast<ObjetoEscuelaBase>());
-            diccionario.Add(LlaveDiccionario.Evaluaciones, listatmpEva.Cast<ObjetoEscuelaBase>());
+            diccionario.Add(LlaveDiccionario.Asignatura, listatmpAsig.Cast<ObjetoEscuelaBase>());
+            diccionario.Add(LlaveDiccionario.Alumno, listatmpAlunm.Cast<ObjetoEscuelaBase>());
+            diccionario.Add(LlaveDiccionario.Evaluacion, listatmpEva.Cast<ObjetoEscuelaBase>());
 
 
             return diccionario;
@@ -104,20 +135,21 @@ namespace CoreEscuela.App
         private void CargarEvaluaciones()
         {
             var lista = new List<Evaluacion>();
+            var rnd = new Random();
             foreach (var curso in escuela.Cursos)
             {
                 foreach (var asignatura in curso.Asignaturas)
                 {
                     foreach (var alunmo in curso.Alumnos)
                     {
-                        var rnd = new Random();
+                        
                         for (int i = 0; i < 3; i++)
                         {
                             var ev = new Evaluacion
                             {
                                 Asignatura = asignatura,
                                 Nombre = $"{asignatura.Nombre} Ev#{i + 1}",
-                                Nota = (float)(5 * rnd.NextDouble()),
+                                Nota = (float)Math.Round((5 * rnd.NextDouble()),2),
                                 Alumno = alunmo
                             };
                             alunmo.Evaluaciones.Add(ev);
